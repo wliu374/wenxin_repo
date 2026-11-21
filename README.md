@@ -29,21 +29,19 @@ Each section is its own page: `/`, `/research/`, `/publications/`, and `/about/`
 
 ### Contact links
 
-`visibleLinks()` in `profile.ts` drops a link when `href` is empty or contains `todo` or `placeholder`. LinkedIn is in the data with an empty `href` and `todo: true`, so it is not rendered. Set `href` to the real profile URL and it will show on the about page and in the footer. Google Scholar stays.
+`visibleLinks()` in `profile.ts` drops a link when `href` is empty or contains `todo` or `placeholder`. LinkedIn is in the data with an empty `href` and `todo: true`, so it is not rendered. Set `href` to the real profile URL and it will show in the contact section. Google Scholar stays, including the sidebar icon.
 
 ### Headshot
 
-Leave `profile.headshot` unset and the home hero stays a single column. To add one, put an image in `public/` and set `headshot` to a site-relative path such as `/headshot.jpg` (plus `headshotAlt`). The home page prefixes that path with the base.
+Leave `profile.headshot` unset and the sidebar shows a round initials mark. To add one, put an image in `public/` and set `headshot` to a site-relative path such as `/headshot.jpg` (plus `headshotAlt`). The sidebar prefixes that path with the base.
 
 ### Publications
 
-Each entry has `title`, `authors`, `venue`, `year`, `status` (`published`, `under review`, or `in prep`), and optional `links.pdf`, `links.doi`, and `links.code`. The author string that matches `highlightedAuthor` is bold. Add a DOI only after checking it.
+Each entry has `title`, `authors`, `venue`, `year`, `status` (`published`, `under review`, or `in prep`), an optional `kind` such as `Journal Article`, and optional `links.pdf`, `links.doi`, and `links.code`. The author string that matches `highlightedAuthor` is bold. Add a DOI only after checking it.
 
 ## Visual system
 
-Colors, type, spacing, and radii are CSS variables in `src/styles/tokens.css`. The layout notes are in `docs/design-spec.md`. Headings use Inter Tight. Labels use IBM Plex Mono.
-
-The nav theme button stores `light` or `dark` in `localStorage` under the key `theme`. With no stored choice, the site follows `prefers-color-scheme`.
+Colors and type are CSS variables in `src/styles/tokens.css`. The layout notes, including photo credits, are in `docs/design-spec.md`. The reading type is Lato. A fixed sidebar holds the nav; on a narrow screen it collapses behind a menu button.
 
 ## GitHub Pages
 

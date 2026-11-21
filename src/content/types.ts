@@ -37,7 +37,7 @@ export type Profile = {
   /**
    * Optional headshot. A site-relative path such as `/headshot.jpg` (a file in
    * `public/`) is prefixed with the Astro base. When unset, the photo slot is
-   * not rendered.
+   * not rendered and the sidebar shows initials instead.
    */
   headshot?: string;
   headshotAlt?: string;
@@ -61,6 +61,8 @@ export type ResearchArea = {
   summary: string;
   description: string;
   skills: string[];
+  /** Short labels for the research-page interests column. */
+  interests?: string[];
   /** Ordered stages. Omitted when a project has no pipeline to show. */
   pipeline?: PipelineStep[];
   caseStudy?: CaseStudy;
@@ -80,5 +82,7 @@ export type Publication = {
   venue: string;
   year: number;
   status: PublicationStatus;
+  /** Short type label shown on the publication card, such as "Journal Article". */
+  kind?: string;
   links?: PublicationLinks;
 };

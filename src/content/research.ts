@@ -17,6 +17,14 @@ export const researchAreas: ResearchArea[] = [
       "ROS",
       "Flight-controller integration for spray drones",
     ],
+    interests: [
+      "Computer vision",
+      "Deep learning",
+      "ROS",
+      "Flight-controller integration",
+      "Precision agriculture",
+      "Remote sensing",
+    ],
     pipeline: [
       {
         title: "Image capture",

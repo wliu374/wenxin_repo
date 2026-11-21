@@ -1,10 +1,10 @@
 import { withBase } from "./withBase";
 
 export const pages = [
-  { href: "/", label: "Home" },
-  { href: "/research/", label: "Research" },
-  { href: "/publications/", label: "Publications" },
-  { href: "/about/", label: "About" },
+  { href: "/", label: "Home", icon: "home" },
+  { href: "/about/", label: "About Me", icon: "user" },
+  { href: "/research/", label: "Research", icon: "research" },
+  { href: "/publications/", label: "Publications", icon: "publications" },
 ] as const;
 
 function normalize(path: string): string {

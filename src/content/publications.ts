@@ -39,6 +39,7 @@ export const publications: Publication[] = [
     venue: "Computers and Electronics in Agriculture 237, 110600",
     year: 2025,
     status: "published",
+    kind: "Journal Article",
     links: {
       doi: "https://doi.org/10.1016/j.compag.2025.110600",
     },
@@ -57,6 +58,7 @@ export const publications: Publication[] = [
     venue: "IEEE Geoscience and Remote Sensing Letters 19, 1–5",
     year: 2022,
     status: "published",
+    kind: "Journal Article",
     links: {
       doi: "https://doi.org/10.1109/LGRS.2022.3186544",
       code: "https://github.com/wliu374/Plant_Counting",
