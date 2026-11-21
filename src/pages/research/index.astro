@@ -1,0 +1,68 @@
+---
+import Base from "../../layouts/Base.astro";
+import { profile } from "../../content/profile";
+import { researchAreas } from "../../content/research";
+
+const area = researchAreas[0];
+const interests = area?.interests?.length ? area.interests : area?.skills ?? [];
+---
+
+<Base
+  title={area ? `${area.title} · ${profile.name}` : `Research · ${profile.name}`}
+  description={area?.summary ?? "Research will be added here."}
+  banner="Research"
+>
+  {
+    area ? (
+      <div class="stack">
+        <section class="split" aria-labelledby="dart-heading">
+          <div>
+            <h2 id="dart-heading" class="section-title">{area.title}</h2>
+            <div class="prose">
+              {area.expansion && <p>{area.expansion}.</p>}
+              <p>{area.summary}</p>
+              <p>{area.description}</p>
+            </div>
+          </div>
+          {interests.length > 0 && (
+            <aside class="interests" aria-labelledby="interest-heading">
+              <h2 id="interest-heading">Interests</h2>
+              <ul class="interest-list">
+                {interests.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </aside>
+          )}
+        </section>
+
+        {area.pipeline && area.pipeline.length > 0 && (
+          <section aria-labelledby="pipeline-heading">
+            <h2 id="pipeline-heading" class="section-title">Pipeline</h2>
+            <ol class="steps">
+              {area.pipeline.map((step, index) => (
+                <li>
+                  <span class="step-index">{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3>{step.title}</h3>
+                    <p>{step.detail}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+
+        {area.caseStudy && (
+          <section class="case-study" aria-labelledby="case-heading">
+            <h2 id="case-heading" class="section-title">Case study</h2>
+            <h3>{area.caseStudy.title}</h3>
+            <p>{area.caseStudy.detail}</p>
+          </section>
+        )}
+      </div>
+    ) : (
+      <p class="empty">Research will be added here.</p>
+    )
+  }
+</Base>

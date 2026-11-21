@@ -1,0 +1,77 @@
+---
+import type { Publication, PublicationStatus } from "../content/types";
+import { highlightedAuthor } from "../content/publications";
+
+interface Props {
+  publication: Publication;
+}
+
+const { publication } = Astro.props;
+
+const statusLabel: Record<PublicationStatus, string> = {
+  published: "Published",
+  "under review": "Under review",
+  "in prep": "In prep",
+};
+
+const actions: { href: string; label: string }[] = [];
+if (publication.links?.doi) actions.push({ href: publication.links.doi, label: "DOI" });
+if (publication.links?.code) actions.push({ href: publication.links.code, label: "Code" });
+if (publication.links?.pdf) actions.push({ href: publication.links.pdf, label: "PDF" });
+---
+
+<article class="paper">
+  <h2>{publication.title}</h2>
+  <p class="paper__authors">
+    {
+      publication.authors.map((author, index) => (
+        <span>
+          {index > 0 && ", "}
+          {author === highlightedAuthor ? <strong>{author}</strong> : author}
+        </span>
+      ))
+    }
+  </p>
+  <p class="paper__meta">
+    <span class="tag">{publication.kind ?? statusLabel[publication.status]}</span>
+    <span class="paper__venue">{publication.venue}, {publication.year}</span>
+  </p>
+  {
+    actions.length > 0 && (
+      <div class="paper__actions">
+        {actions.map((action) => (
+          <a class="icon-btn" href={action.href} aria-label={action.label}>
+            {action.label === "Code" ? (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 8 5 12l4 4M15 8l4 4-4 4"
+                />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  d="M14 5h5v5M19 5 10 14"
+                />
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  d="M12 6H7a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-5"
+                />
+              </svg>
+            )}
+          </a>
+        ))}
+      </div>
+    )
+  }
+</article>

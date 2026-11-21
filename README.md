@@ -21,29 +21,27 @@ Components do not hardcode page copy. Change the data files, then refresh.
 | File | What it feeds |
 | --- | --- |
 | `src/content/types.ts` | Shared TypeScript types |
-| `src/content/profile.ts` | About: name, role, education, interests, contact links |
-| `src/content/research.ts` | Research areas |
+| `src/content/profile.ts` | Name, headline, summary, education, interests, contact links, optional headshot |
+| `src/content/research.ts` | Research areas, pipeline steps, and the case study |
 | `src/content/publications.ts` | Papers, the highlighted author string, and the Scholar “full list” URL |
 
-The page is one document with three anchors: `#about`, `#research`, `#publications`.
+Each section is its own page: `/`, `/research/`, `/publications/`, and `/about/`. The nav highlights the current page. Routes are prefixed with the site base, so the public paths are `/wenxin_repo/`, `/wenxin_repo/research/`, and so on.
 
 ### Contact links
 
-`visibleLinks()` in `profile.ts` drops a link when `href` is empty or contains `todo` or `placeholder`. LinkedIn is in the data with an empty `href` and `todo: true`, so it is not rendered. Set `href` to the real profile URL and it will show in the hero and the footer. Google Scholar stays.
+`visibleLinks()` in `profile.ts` drops a link when `href` is empty or contains `todo` or `placeholder`. LinkedIn is in the data with an empty `href` and `todo: true`, so it is not rendered. Set `href` to the real profile URL and it will show in the contact section. Google Scholar stays, including the sidebar icon.
 
 ### Headshot
 
-Leave `profile.headshot` unset and the photo slot is not rendered. To add one, put an image in `public/` and set `headshot` to a site-relative path such as `/headshot.jpg` (plus `headshotAlt`). The intro prefixes that path with the base.
+Leave `profile.headshot` unset and the sidebar shows a round initials mark. To add one, put an image in `public/` and set `headshot` to a site-relative path such as `/headshot.jpg` (plus `headshotAlt`). The sidebar prefixes that path with the base.
 
 ### Publications
 
-Each entry has `title`, `authors`, `venue`, `year`, `status` (`published`, `under review`, or `in prep`), and optional `links.pdf`, `links.doi`, and `links.code`. The author string that matches `highlightedAuthor` is bold. Add a DOI only after checking it.
+Each entry has `title`, `authors`, `venue`, `year`, `status` (`published`, `under review`, or `in prep`), an optional `kind` such as `Journal Article`, and optional `links.pdf`, `links.doi`, and `links.code`. The author string that matches `highlightedAuthor` is bold. Add a DOI only after checking it.
 
 ## Visual system
 
-Colors, type, spacing, and radii are CSS variables in `src/styles/tokens.css`. The layout notes are in `docs/design-spec.md`. Section components should keep using those tokens.
-
-The nav theme button stores `light` or `dark` in `localStorage` under the key `theme`. With no stored choice, the site follows `prefers-color-scheme`.
+Colors and type are CSS variables in `src/styles/tokens.css`. The layout notes, including photo credits, are in `docs/design-spec.md`. The reading type is Lato. A fixed sidebar holds the nav; on a narrow screen it collapses behind a menu button.
 
 ## GitHub Pages
 

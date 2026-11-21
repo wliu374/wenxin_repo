@@ -1,0 +1,9 @@
+---
+import Base from "../../layouts/Base.astro";
+import AboutBody from "../../components/AboutBody.astro";
+import { profile } from "../../content/profile";
+---
+
+<Base title={`About · ${profile.name}`} description={profile.summary} banner="About Me">
+  <AboutBody />
+</Base>

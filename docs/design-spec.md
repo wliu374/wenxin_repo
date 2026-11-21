@@ -1,119 +1,49 @@
 # Design spec
 
-Visual contract for the academic site. Implement every color, font, size, space, and radius through the custom properties in `src/styles/tokens.css`. Section components should not introduce new hex values, font stacks, or raw spacing.
+Light academic site with a fixed dark sidebar and a banner on every page. Copy lives in `src/content/*.ts`. In-site paths go through `withBase()` so they work under `/wenxin_repo/`.
 
-The designer attachment named in the original brief was not present in the workspace when this scaffold was built. This document is the system the site ships with. If the original file is recovered, replace this one and update `tokens.css` to match it.
+## Pages
 
-## Palette
-
-| Token | Light | Dark |
+| Route | Banner | Content |
 | --- | --- | --- |
-| `--color-bg` | `#f3efe6` | `#121410` |
-| `--color-bg-elevated` | `#faf7f1` | `#1c1f1a` |
-| `--color-ink` | `#1c1914` | `#f4f0e7` |
-| `--color-muted` | `#5c564c` | `#c9c0b3` |
-| `--color-line` | `#ddd4c4` | `#31352e` |
-| `--color-accent` | `#1b5640` | `#9fceb6` |
-| `--color-accent-soft` | `#e4f0e9` | `#1a2c23` |
-| `--color-on-accent` | `#f7fbf8` | `#102117` |
+| `/` | Home | Biography, education, research interests, other interests, and contact. |
+| `/about/` | About Me | The same about sections. |
+| `/research/` | Research | DART narrative beside an interests list, then the pipeline and the soybean case study. |
+| `/publications/` | Publications | One card per paper, then the Scholar list link. |
 
-Light is the default on `:root`. Dark applies when `prefers-color-scheme: dark` and the visitor has not chosen light. `html[data-theme="light"]` and `html[data-theme="dark"]` override the system preference. The nav toggle writes that attribute and stores it in `localStorage` (`theme`).
-
-## Fonts
-
-Self-hosted variable fonts.
-
-| Token | Stack |
-| --- | --- |
-| `--font-serif` | Newsreader Variable, then Iowan Old Style, Palatino, Georgia |
-| `--font-sans` | Source Sans 3 Variable, then Source Sans 3, Segoe UI |
-
-Use the serif for the name, research titles, publication titles, and the footer name. Use the sans for UI, body, nav, and the numbered section labels.
-
-| Token | Value |
-| --- | --- |
-| `--weight-regular` | 440 |
-| `--weight-medium` | 560 |
-| `--weight-semibold` | 650 |
-
-## Type scale
-
-| Token | Value |
-| --- | --- |
-| `--text-xs` | 0.75rem |
-| `--text-sm` | 0.875rem |
-| `--text-base` | 1.0625rem |
-| `--text-md` | 1.3125rem |
-| `--text-lg` | 1.75rem |
-| `--text-xl` | 2.25rem |
-| `--text-display` | clamp(3rem, 8vw, 5.25rem) |
-
-| Token | Value |
-| --- | --- |
-| `--leading-tight` | 1.05 |
-| `--leading-snug` | 1.28 |
-| `--leading-body` | 1.65 |
-| `--tracking-label` | 0.16em |
-
-Section labels use `--text-xs`, `--tracking-label`, and uppercase.
-
-## Spacing
-
-| Token | Value |
-| --- | --- |
-| `--space-1` | 0.25rem |
-| `--space-2` | 0.5rem |
-| `--space-3` | 0.75rem |
-| `--space-4` | 1rem |
-| `--space-5` | 1.5rem |
-| `--space-6` | 2.25rem |
-| `--space-7` | 3.5rem |
-| `--space-8` | 5.5rem |
-| `--space-9` | 8rem |
-
-| Token | Value |
-| --- | --- |
-| `--page-width` | 70rem |
-| `--measure` | 40rem |
-| `--nav-height` | 4.5rem |
-| `--gutter` | clamp(1.25rem, 4vw, 2.75rem) |
-
-## Radii
-
-| Token | Value |
-| --- | --- |
-| `--radius-sm` | 2px |
-| `--radius-md` | 8px |
-| `--radius-pill` | 999px |
-
-Use the pill for the theme toggle and skill chips. Use `--radius-md` only if a headshot is set. Do not draw an empty portrait frame.
+The sidebar links to all four routes and marks the current one. Google Scholar is the only contact link until LinkedIn has a real URL.
 
 ## Layout
 
-### Nav
+The sidebar is fixed, 260px wide, and full viewport height. Its background is a field photograph under a dark green overlay. At the top: a round avatar (initials `WL` until `profile.headshot` is set, then that image), the name in Lato 300, and the role plus affiliation. Nav items are a vertical list with a small icon. The active item uses a darker row. At the bottom: a Scholar icon and `© Wenxin Liu 2026`.
 
-Sticky bar under a 3px accent rule. Name on the left, linking to `#about`. Anchor links About (`#about`), Research (`#research`), Publications (`#publications`), then the theme toggle. On narrow viewports the tools row wraps under the name. The bar uses the page background with a hairline along the bottom.
+Below 860px the sidebar slides off-screen. A dark top bar with a menu button opens it.
 
-### Hero
+Each page opens with a 220px banner. The page title is large, white, and set in Lato 300 over the drone photograph. The reading area is light gray (`#f3f4f6`) with Lato 300/400. Section titles have a thin rule underneath. Interest rows are white strips with a teal left border. Publication titles stay light; `W Liu` is bold; the type tag is teal; DOI and code are small icon buttons at the card’s lower right.
 
-`#about`. Department as a small uppercase kicker, then the name at `--text-display`, then role and affiliation. Prior degrees, research interests, and personal interests follow in the same column (`--measure`). Contact links sit under that copy. Render a link only when its URL is present and is not a placeholder. Render a headshot only when `headshot` is set.
+There is no dark-theme toggle. The sidebar is the dark surface; the articles stay light.
 
-### Section headings
+## Color and type
 
-Research and publications use one label, set in the sans, uppercase, accent colored:
+| Token | Value |
+| --- | --- |
+| `--color-bg` | `#f3f4f6` |
+| `--color-surface` | `#ffffff` |
+| `--color-ink` | `#3a3a3a` |
+| `--color-accent` | `#1aae9f` |
+| `--font-sans` | Lato, then Segoe UI |
 
-`01 / RESEARCH`
+Lato is self-hosted at weights 300, 400, and 700. Weight 700 is only for the highlighted author name.
 
-`02 / PUBLICATIONS`
+## Photographs
 
-The index, a muted slash, and the title are one heading. Body copy in the section stays inside `--measure`. Sections are separated with a top border.
+Downloaded into `public/images/` and served from the site. They are not hotlinked. Neither image is from the reference site.
 
-### Footer
+| File | Subject | Source | License |
+| --- | --- | --- | --- |
+| `public/images/banner-drone.webp` | Agricultural spray drone over a crop field. Cropped and exported as WebP, 1600×600. | Magda Ehlers, [Pexels](https://www.pexels.com/photo/drone-flying-over-agricultural-field-in-rural-area-34182315/) | [Pexels License](https://www.pexels.com/license/) |
+| `public/images/sidebar-field.webp` | Dark grass field under storm clouds. Cropped and exported as WebP, 720×1028. | eberhard grossgasteiger, [Pexels](https://www.pexels.com/photo/brown-grass-field-under-black-sky-during-nighttime-976907/) | [Pexels License](https://www.pexels.com/license/) |
 
-Top border. Name, role and department, affiliation, and the same visible contact links as the hero. No email, GitHub, CV, or X.
+## Headshot
 
-## Theme behavior
-
-1. No stored choice: follow `prefers-color-scheme`.
-2. Toggle: set `data-theme` to the opposite of the current effective theme and save it.
-3. Reload: the inline script in the document head applies the stored choice before paint.
+Leave `profile.headshot` unset and the avatar is initials drawn from the name. Set it to a site-relative path such as `/headshot.jpg`, plus `headshotAlt` if the picture needs its own description. The sidebar prefixes the path with the base.

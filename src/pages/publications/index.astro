@@ -1,0 +1,29 @@
+---
+import Base from "../../layouts/Base.astro";
+import PublicationCard from "../../components/PublicationCard.astro";
+import { profile } from "../../content/profile";
+import { publications, scholarProfileUrl } from "../../content/publications";
+---
+
+<Base
+  title={`Publications · ${profile.name}`}
+  description="Selected papers on weed detection and maize stand counting."
+  banner="Publications"
+>
+  {
+    publications.length === 0 ? (
+      <p class="empty">Publications will be added here.</p>
+    ) : (
+      <ol class="paper-list">
+        {publications.map((publication) => (
+          <li>
+            <PublicationCard publication={publication} />
+          </li>
+        ))}
+      </ol>
+    )
+  }
+  <p class="more-link">
+    <a href={scholarProfileUrl}>Full list on Google Scholar</a>
+  </p>
+</Base>

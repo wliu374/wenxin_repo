@@ -1,0 +1,148 @@
+---
+import { profile, visibleLinks } from "../content/profile";
+import { isCurrentPath, pages } from "../lib/pages";
+import { withBase } from "../lib/withBase";
+
+const scholar = visibleLinks(profile.links).find((link) => link.label === "Google Scholar");
+const initials = profile.name
+  .trim()
+  .split(/\s+/)
+  .slice(0, 2)
+  .map((part) => part[0]?.toUpperCase() ?? "")
+  .join("");
+---
+
+<button id="sidebar-scrim" class="sidebar-scrim" type="button" aria-label="Close menu" hidden></button>
+<aside id="sidebar" class="sidebar">
+  <img
+    class="sidebar__photo"
+    src={withBase("/images/sidebar-field.webp")}
+    alt=""
+    width="720"
+    height="1028"
+  />
+  <div class="sidebar__shade" aria-hidden="true"></div>
+  <div class="sidebar__inner">
+    <div class="profile-block">
+      {
+        profile.headshot ? (
+          <img
+            class="avatar"
+            src={withBase(profile.headshot)}
+            alt={profile.headshotAlt ?? ""}
+            width="116"
+            height="116"
+          />
+        ) : (
+          <div class="avatar avatar--initials" aria-hidden="true">
+            {initials}
+          </div>
+        )
+      }
+      <p class="sidebar__name">{profile.name}</p>
+      <p class="sidebar__role">{profile.role}, {profile.affiliation}</p>
+    </div>
+    <nav class="side-nav" aria-label="Primary">
+      <ul>
+        {
+          pages.map((page) => (
+            <li>
+              <a
+                href={withBase(page.href)}
+                aria-current={isCurrentPath(Astro.url.pathname, page.href) ? "page" : undefined}
+              >
+                {page.icon === "home" && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M12 4.2 4 10.2V20h6.2v-5.2h3.6V20H20v-9.8z"
+                    />
+                  </svg>
+                )}
+                {page.icon === "user" && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="8" r="3.1" fill="currentColor" />
+                    <path
+                      fill="currentColor"
+                      d="M5.5 19.2c.8-3 3.3-4.6 6.5-4.6s5.7 1.6 6.5 4.6z"
+                    />
+                  </svg>
+                )}
+                {page.icon === "research" && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      d="M9 4h6M10 4v5.2L6.2 16a3.6 3.6 0 0 0 3.2 5.4h5.2A3.6 3.6 0 0 0 17.8 16L14 9.2V4"
+                    />
+                  </svg>
+                )}
+                {page.icon === "publications" && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M6 4.5h9.2A2.8 2.8 0 0 1 18 7.3V20l-6-2.6L6 20z"
+                    />
+                  </svg>
+                )}
+                {page.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="sidebar__foot">
+      {
+        scholar && (
+          <a class="scholar-icon" href={scholar.href} aria-label={scholar.label}>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M3 9.2 12 4l9 5.2-9 5.1zM6.2 11.6V16c0 1.8 2.6 3.4 5.8 3.4s5.8-1.6 5.8-3.4v-4.4l-5.8 3.3z"
+              />
+            </svg>
+          </a>
+        )
+      }
+      <p class="copyright">© {profile.name} 2026</p>
+    </div>
+  </div>
+</aside>
+
+<header class="topbar">
+  <button id="menu-toggle" class="menu-button" type="button" aria-controls="sidebar" aria-expanded="false">
+    <span></span>
+    <span class="visually-hidden">Menu</span>
+  </button>
+  <p class="topbar__name">{profile.name}</p>
+</header>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>("#menu-toggle");
+  const sidebar = document.querySelector<HTMLElement>("#sidebar");
+  const scrim = document.querySelector<HTMLButtonElement>("#sidebar-scrim");
+
+  function setOpen(open: boolean): void {
+    sidebar?.classList.toggle("is-open", open);
+    button?.setAttribute("aria-expanded", open ? "true" : "false");
+    if (!scrim) return;
+    if (open) scrim.hidden = false;
+    else scrim.hidden = true;
+  }
+
+  button?.addEventListener("click", () => {
+    setOpen(!sidebar?.classList.contains("is-open"));
+  });
+
+  scrim?.addEventListener("click", () => setOpen(false));
+
+  sidebar?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setOpen(false));
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setOpen(false);
+  });
+</script>
