@@ -1,0 +1,26 @@
+{
+  "name": "wenxin-liu",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1 --port 4391",
+    "build": "astro build",
+    "preview": "astro preview --host 127.0.0.1 --port 4391",
+    "check": "astro check",
+    "lint": "astro check",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "@fontsource-variable/source-sans-3": "^5.3.1",
+    "astro": "^7.4.13"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "typescript": "^6.0.3"
+  }
+}

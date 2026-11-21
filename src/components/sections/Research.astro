@@ -1,0 +1,31 @@
+---
+import SectionHeading from "../SectionHeading.astro";
+import { researchAreas } from "../../content/research";
+---
+
+<section class="section" id="research" aria-labelledby="research-heading">
+  <div class="shell column">
+    <SectionHeading index="01" title="Research" id="research-heading" />
+    {
+      researchAreas.length === 0 ? (
+        <p class="empty">Research notes will be added here.</p>
+      ) : (
+        researchAreas.map((area) => (
+          <article class="area" id={area.id}>
+            <h3>{area.title}</h3>
+            {area.expansion && <p class="expansion">{area.expansion}</p>}
+            <p class="area__summary">{area.summary}</p>
+            <p class="area__description">{area.description}</p>
+            {area.skills.length > 0 && (
+              <ul class="skills" aria-label={`${area.title} skills`}>
+                {area.skills.map((skill) => (
+                  <li>{skill}</li>
+                ))}
+              </ul>
+            )}
+          </article>
+        ))
+      )
+    }
+  </div>
+</section>

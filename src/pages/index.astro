@@ -1,0 +1,13 @@
+---
+import Base from "../layouts/Base.astro";
+import Intro from "../components/sections/Intro.astro";
+import Research from "../components/sections/Research.astro";
+import Publications from "../components/sections/Publications.astro";
+import { profile } from "../content/profile";
+---
+
+<Base title={profile.name} description={profile.summary}>
+  <Intro />
+  <Research />
+  <Publications />
+</Base>
