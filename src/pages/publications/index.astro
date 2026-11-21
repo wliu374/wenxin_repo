@@ -1,0 +1,32 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import PublicationCard from "../../components/PublicationCard.astro";
+import { profile } from "../../content/profile";
+import { publications, scholarProfileUrl } from "../../content/publications";
+---
+
+<Base
+  title={`Publications · ${profile.name}`}
+  description="Selected papers on weed detection and maize stand counting."
+>
+  <div class="shell page">
+    <PageHero eyebrow="Selected work" title="Publications" />
+    {
+      publications.length === 0 ? (
+        <p class="empty">Publications will be added here.</p>
+      ) : (
+        <ol class="pub-list">
+          {publications.map((publication) => (
+            <li>
+              <PublicationCard publication={publication} />
+            </li>
+          ))}
+        </ol>
+      )
+    }
+    <p class="more">
+      <a class="pill pill--ghost" href={scholarProfileUrl}>Full list on Google Scholar</a>
+    </p>
+  </div>
+</Base>

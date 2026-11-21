@@ -1,0 +1,16 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  lede?: string;
+  accent?: boolean;
+}
+
+const { eyebrow, title, lede, accent = false } = Astro.props;
+---
+
+<header class="page-hero">
+  <p class="eyebrow">{eyebrow}</p>
+  <h1>{title}</h1>
+  {lede && <p class:list={["lede", accent && "lede--accent"]}>{lede}</p>}
+</header>

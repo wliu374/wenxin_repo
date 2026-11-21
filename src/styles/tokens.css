@@ -1,31 +1,32 @@
 /*
- * Visual decisions live here. Components reference these variables only.
- * Light values are the default. Dark values follow prefers-color-scheme
- * unless a manual choice is stored on <html data-theme="light|dark">.
- * Keep the light block and the dark block in sync with docs/design-spec.md.
+ * Visual tokens for the redesign. Components use these variables only.
+ * Light is the default. Dark follows prefers-color-scheme unless a choice
+ * is stored on <html data-theme="light|dark">.
  */
 
 :root {
-  --font-serif: "Newsreader Variable", "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
-  --font-sans: "Source Sans 3 Variable", "Source Sans 3", "Segoe UI", sans-serif;
+  --font-sans: "Inter Tight Variable", "Inter Tight", "Avenir Next", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1.0625rem;
-  --text-md: 1.3125rem;
-  --text-lg: 1.75rem;
-  --text-xl: 2.25rem;
-  --text-display: clamp(3rem, 8vw, 5.25rem);
+  --text-md: 1.25rem;
+  --text-lg: 1.5rem;
+  --text-xl: clamp(2.6rem, 5vw, 4.25rem);
+  --text-display: clamp(2.35rem, 6.4vw, 5.35rem);
 
-  --leading-tight: 1.05;
-  --leading-snug: 1.28;
-  --leading-body: 1.65;
+  --leading-tight: 0.94;
+  --leading-snug: 1.2;
+  --leading-body: 1.6;
 
-  --weight-regular: 440;
+  --weight-regular: 460;
   --weight-medium: 560;
   --weight-semibold: 650;
+  --weight-bold: 750;
+  --weight-heavy: 800;
 
-  --tracking-label: 0.16em;
+  --tracking-label: 0.14em;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -35,62 +36,87 @@
   --space-6: 2.25rem;
   --space-7: 3.5rem;
   --space-8: 5.5rem;
-  --space-9: 8rem;
 
-  --radius-sm: 2px;
-  --radius-md: 8px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
   --radius-pill: 999px;
 
-  --page-width: 70rem;
-  --measure: 40rem;
-  --nav-height: 4.5rem;
-  --gutter: clamp(1.25rem, 4vw, 2.75rem);
+  --page-width: 72rem;
+  --measure: 42rem;
+  --nav-height: 4.25rem;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+
+  --shadow-card: 0 16px 40px rgba(18, 40, 32, 0.06), 0 1px 2px rgba(18, 40, 32, 0.04);
+  --shadow-card-hover: 0 18px 44px rgba(18, 40, 32, 0.1), 0 1px 2px rgba(18, 40, 32, 0.05);
 
   color-scheme: light;
-  --color-bg: #f3efe6;
-  --color-bg-elevated: #faf7f1;
-  --color-ink: #1c1914;
-  --color-muted: #5c564c;
-  --color-line: #ddd4c4;
-  --color-accent: #1b5640;
-  --color-accent-soft: #e4f0e9;
-  --color-on-accent: #f7fbf8;
+  --color-bg: #eef3f6;
+  --color-bg-elevated: #ffffff;
+  --color-ink: #14211c;
+  --color-muted: #5a6b64;
+  --color-line: #d5e1db;
+  --color-line-strong: #b7c9c0;
+  --color-accent: #0e7a45;
+  --color-accent-soft: #e5f4ec;
+  --color-on-accent: #f4fbf7;
+  --color-grid: rgba(20, 40, 32, 0.045);
+  --color-glow-blue: rgba(86, 150, 210, 0.2);
+  --color-glow-green: rgba(14, 122, 69, 0.12);
 }
 
 :root[data-theme="light"] {
   color-scheme: light;
-  --color-bg: #f3efe6;
-  --color-bg-elevated: #faf7f1;
-  --color-ink: #1c1914;
-  --color-muted: #5c564c;
-  --color-line: #ddd4c4;
-  --color-accent: #1b5640;
-  --color-accent-soft: #e4f0e9;
-  --color-on-accent: #f7fbf8;
+  --color-bg: #eef3f6;
+  --color-bg-elevated: #ffffff;
+  --color-ink: #14211c;
+  --color-muted: #5a6b64;
+  --color-line: #d5e1db;
+  --color-line-strong: #b7c9c0;
+  --color-accent: #0e7a45;
+  --color-accent-soft: #e5f4ec;
+  --color-on-accent: #f4fbf7;
+  --color-grid: rgba(20, 40, 32, 0.045);
+  --color-glow-blue: rgba(86, 150, 210, 0.2);
+  --color-glow-green: rgba(14, 122, 69, 0.12);
+  --shadow-card: 0 16px 40px rgba(18, 40, 32, 0.06), 0 1px 2px rgba(18, 40, 32, 0.04);
+  --shadow-card-hover: 0 18px 44px rgba(18, 40, 32, 0.1), 0 1px 2px rgba(18, 40, 32, 0.05);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --color-bg: #121410;
-    --color-bg-elevated: #1c1f1a;
-    --color-ink: #f4f0e7;
-    --color-muted: #c9c0b3;
-    --color-line: #31352e;
-    --color-accent: #9fceb6;
-    --color-accent-soft: #1a2c23;
-    --color-on-accent: #102117;
+    --color-bg: #0e1412;
+    --color-bg-elevated: #171f1c;
+    --color-ink: #eef4f0;
+    --color-muted: #a7b5ae;
+    --color-line: #2a3832;
+    --color-line-strong: #3d5148;
+    --color-accent: #7dcea5;
+    --color-accent-soft: #163028;
+    --color-on-accent: #07140e;
+    --color-grid: rgba(232, 244, 236, 0.045);
+    --color-glow-blue: rgba(90, 150, 200, 0.1);
+    --color-glow-green: rgba(125, 206, 165, 0.1);
+    --shadow-card: 0 16px 40px rgba(0, 0, 0, 0.28);
+    --shadow-card-hover: 0 18px 44px rgba(0, 0, 0, 0.4);
   }
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --color-bg: #121410;
-  --color-bg-elevated: #1c1f1a;
-  --color-ink: #f4f0e7;
-  --color-muted: #c9c0b3;
-  --color-line: #31352e;
-  --color-accent: #9fceb6;
-  --color-accent-soft: #1a2c23;
-  --color-on-accent: #102117;
+  --color-bg: #0e1412;
+  --color-bg-elevated: #171f1c;
+  --color-ink: #eef4f0;
+  --color-muted: #a7b5ae;
+  --color-line: #2a3832;
+  --color-line-strong: #3d5148;
+  --color-accent: #7dcea5;
+  --color-accent-soft: #163028;
+  --color-on-accent: #07140e;
+  --color-grid: rgba(232, 244, 236, 0.045);
+  --color-glow-blue: rgba(90, 150, 200, 0.1);
+  --color-glow-green: rgba(125, 206, 165, 0.1);
+  --shadow-card: 0 16px 40px rgba(0, 0, 0, 0.28);
+  --shadow-card-hover: 0 18px 44px rgba(0, 0, 0, 0.4);
 }

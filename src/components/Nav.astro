@@ -1,24 +1,24 @@
 ---
 import { profile } from "../content/profile";
+import { isCurrentPath, pages } from "../lib/pages";
 import { withBase } from "../lib/withBase";
-
-const links = [
-  { href: withBase("#about"), label: "About" },
-  { href: withBase("#research"), label: "Research" },
-  { href: withBase("#publications"), label: "Publications" },
-];
 ---
 
 <header class="site-header">
   <div class="shell site-header__inner">
-    <a class="brand" href={withBase("#about")}>{profile.name}</a>
+    <a class="brand" href={withBase("/")}>{profile.name}</a>
     <div class="site-header__tools">
       <nav aria-label="Primary">
         <ul class="nav-links">
           {
-            links.map((link) => (
+            pages.map((page) => (
               <li>
-                <a href={link.href}>{link.label}</a>
+                <a
+                  href={withBase(page.href)}
+                  aria-current={isCurrentPath(Astro.url.pathname, page.href) ? "page" : undefined}
+                >
+                  {page.label}
+                </a>
               </li>
             ))
           }

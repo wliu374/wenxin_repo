@@ -26,6 +26,10 @@ export type Profile = {
   affiliation: string;
   /** Prose used for the page description and the about section. */
   summary: string;
+  /** First line of the home headline. */
+  headlineLead: string;
+  /** Second line of the home headline, shown in the accent color. */
+  headlineAccent: string;
   education: Education[];
   researchInterests: string[];
   personalInterests: string[];
@@ -39,6 +43,16 @@ export type Profile = {
   headshotAlt?: string;
 };
 
+export type PipelineStep = {
+  title: string;
+  detail: string;
+};
+
+export type CaseStudy = {
+  title: string;
+  detail: string;
+};
+
 export type ResearchArea = {
   id: string;
   title: string;
@@ -47,6 +61,9 @@ export type ResearchArea = {
   summary: string;
   description: string;
   skills: string[];
+  /** Ordered stages. Omitted when a project has no pipeline to show. */
+  pipeline?: PipelineStep[];
+  caseStudy?: CaseStudy;
 };
 
 export type PublicationStatus = "published" | "under review" | "in prep";

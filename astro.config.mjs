@@ -7,4 +7,5 @@ export default defineConfig({
   site: "https://wliu374.github.io",
   base: "/wenxin_repo",
   output: "static",
+  trailingSlash: "always",
 });

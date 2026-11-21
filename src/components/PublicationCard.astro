@@ -1,0 +1,56 @@
+---
+import type { Publication, PublicationStatus } from "../content/types";
+import { highlightedAuthor } from "../content/publications";
+
+interface Props {
+  publication: Publication;
+}
+
+const { publication } = Astro.props;
+
+const statusLabel: Record<PublicationStatus, string> = {
+  published: "Published",
+  "under review": "Under review",
+  "in prep": "In prep",
+};
+
+const actions: { href: string; label: string }[] = [];
+if (publication.links?.doi) actions.push({ href: publication.links.doi, label: "DOI" });
+if (publication.links?.code) actions.push({ href: publication.links.code, label: "Code" });
+if (publication.links?.pdf) actions.push({ href: publication.links.pdf, label: "PDF" });
+---
+
+<article class="pub-card">
+  <div>
+    <p class="pub-card__meta">
+      <span class="tag">{statusLabel[publication.status]}</span>
+      <span class="tag tag--line">{publication.venue}</span>
+      <span class="pub-card__year">{publication.year}</span>
+    </p>
+    <h2>{publication.title}</h2>
+    <p class="pub-card__authors">
+      {
+        publication.authors.map((author, index) => (
+          <span>
+            {index > 0 && ", "}
+            {author === highlightedAuthor ? <strong>{author}</strong> : author}
+          </span>
+        ))
+      }
+    </p>
+  </div>
+  {
+    actions.length > 0 && (
+      <div class="pub-card__actions">
+        {actions.map((action, index) => (
+          <a
+            class:list={["pill", "pill--small", index === 0 ? "pill--primary" : "pill--ghost"]}
+            href={action.href}
+          >
+            {action.label}
+          </a>
+        ))}
+      </div>
+    )
+  }
+</article>

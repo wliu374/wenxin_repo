@@ -14,6 +14,8 @@ export const profile: Profile = {
   affiliation: "University of Nebraska–Lincoln",
   summary:
     "PhD student in Biological Systems Engineering at the University of Nebraska–Lincoln. M.S. at the University of Wisconsin–Madison in machine learning and signal processing.",
+  headlineLead: "Real-time vision",
+  headlineAccent: "for field weeds.",
   education: [
     {
       degree: "Ph.D. student",

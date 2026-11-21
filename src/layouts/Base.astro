@@ -1,8 +1,7 @@
 ---
-import "@fontsource-variable/newsreader/wght.css";
-import "@fontsource-variable/newsreader/wght-italic.css";
-import "@fontsource-variable/source-sans-3/wght.css";
-import "@fontsource-variable/source-sans-3/wght-italic.css";
+import "@fontsource-variable/inter-tight/wght.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
 import "../styles/tokens.css";
 import "../styles/global.css";
 import Nav from "../components/Nav.astro";
@@ -44,7 +43,7 @@ const canonical = Astro.site
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>
-    <a class="skip" href={withBase("#content")}>Skip to content</a>
+    <a class="skip" href="#content">Skip to content</a>
     <Nav />
     <main id="content">
       <slot />
