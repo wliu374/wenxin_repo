@@ -15,7 +15,7 @@
   --text-md: 1.3125rem;
   --text-lg: 1.75rem;
   --text-xl: 2.25rem;
-  --text-display: clamp(3rem, 8vw, 5.25rem);
+  --text-display: clamp(2.75rem, 6vw, 4.25rem);
 
   --leading-tight: 1.05;
   --leading-snug: 1.28;
@@ -47,11 +47,11 @@
   --gutter: clamp(1.25rem, 4vw, 2.75rem);
 
   color-scheme: light;
-  --color-bg: #f3efe6;
-  --color-bg-elevated: #faf7f1;
+  --color-bg: #f7f5f0;
+  --color-bg-elevated: #fcfbf8;
   --color-ink: #1c1914;
   --color-muted: #5c564c;
-  --color-line: #ddd4c4;
+  --color-line: #e6e0d5;
   --color-accent: #1b5640;
   --color-accent-soft: #e4f0e9;
   --color-on-accent: #f7fbf8;
@@ -59,11 +59,11 @@
 
 :root[data-theme="light"] {
   color-scheme: light;
-  --color-bg: #f3efe6;
-  --color-bg-elevated: #faf7f1;
+  --color-bg: #f7f5f0;
+  --color-bg-elevated: #fcfbf8;
   --color-ink: #1c1914;
   --color-muted: #5c564c;
-  --color-line: #ddd4c4;
+  --color-line: #e6e0d5;
   --color-accent: #1b5640;
   --color-accent-soft: #e4f0e9;
   --color-on-accent: #f7fbf8;
@@ -75,7 +75,7 @@
     --color-bg: #121410;
     --color-bg-elevated: #1c1f1a;
     --color-ink: #f4f0e7;
-    --color-muted: #c9c0b3;
+    --color-muted: #a39c90;
     --color-line: #31352e;
     --color-accent: #9fceb6;
     --color-accent-soft: #1a2c23;
@@ -88,7 +88,7 @@
   --color-bg: #121410;
   --color-bg-elevated: #1c1f1a;
   --color-ink: #f4f0e7;
-  --color-muted: #c9c0b3;
+  --color-muted: #a39c90;
   --color-line: #31352e;
   --color-accent: #9fceb6;
   --color-accent-soft: #1a2c23;

@@ -22,9 +22,13 @@ const statusLabel: Record<PublicationStatus, string> = {
         <p class="empty">Publications will be added here.</p>
       ) : (
         <ol class="pub-list">
-          {publications.map((publication) => (
+          {publications.map((publication, index) => (
             <li class="pub">
-              <p class="pub__year">{publication.year}</p>
+              <p class="pub__year">
+                {index === 0 || publications[index - 1].year !== publication.year
+                  ? publication.year
+                  : ""}
+              </p>
               <div>
                 <h3>{publication.title}</h3>
                 <p class="pub__authors">
